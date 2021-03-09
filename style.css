@@ -15,9 +15,8 @@ html {
   font-family: "Raleway", sans-serif;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -25,14 +24,19 @@ html {
 body {
   background-image: url("./images/bg-mobile.png");
   background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 main {
-  margin: 120px auto;
+  margin: auto;
   width: 88%;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 15px;
 }
 
 /* logo */
@@ -45,9 +49,10 @@ main {
   padding: 40px;
   border-radius: 10px;
   border-top-right-radius: 110px;
+  box-shadow: 2.5rem 8rem 8rem rgba(0, 0, 0, 0.3);
 }
 
-.logo > img {
+.logo>img {
   width: 140px;
 }
 
@@ -56,7 +61,7 @@ main {
   column-gap: 15px;
 }
 
-.icon div {
+.icon a {
   background-color: var(--Very-Dark-Blue);
   width: 50px;
   height: 50px;
@@ -64,18 +69,24 @@ main {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  transition: 1s;
+}
+
+a:hover {
+  background-color: var(--Pale-Blue);
 }
 
 /* status */
 
 .status {
   background-color: var(--Dark-Blue);
+  color: var(--Pale-Blue);
   display: flex;
   flex-direction: column;
-  padding: 30px 30px 50px;
-  color: var(--Pale-Blue);
   align-items: center;
+  padding: 30px 30px 50px;
   border-radius: 10px;
+  box-shadow: 2.5rem 8rem 8rem rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
@@ -85,44 +96,34 @@ main {
 
 .bar {
   width: 100%;
-  height: 20px;
   margin: 15px 0 10px;
-  background-color: gold;
+  padding: 3px;
   background-color: var(--Very-Dark-Blue);
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .progress {
-  background-image: linear-gradient(
-    to right,
-    hsl(6, 100%, 80%),
-    hsl(335, 100%, 65%)
-  );
-  height: 14px;
-  margin: 3px;
+  background-image: linear-gradient( to right, hsl(6, 100%, 80%), hsl(335, 100%, 65%));
+  padding: 2px;
+  width: 73%;
   border-radius: 7px;
-  /* width: 73%; */
-  width: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  transition: width 0.5s;
+  animation: progressStatus 1s;
 }
 
-.progress:hover {
-  width: 73%;
-  cursor: pointer;
+@keyframes progressStatus {
+  0% {
+    width: 0%
+  }
+  100% {
+    width: 73%
+  }
 }
 
 .indicator {
   width: 10px;
   height: 10px;
   background-color: var(--Pale-Blue);
-  margin: 2px;
+  margin-left: auto;
   border-radius: 50%;
 }
 
@@ -140,16 +141,17 @@ main {
 /* info */
 
 .info {
-  width: fit-content;
-  padding: 10px 25px;
   background-color: white;
+  padding: 10px 25px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 10px;
   position: absolute;
-  margin-top: 93.5px;
+  top: 100%;
+  transform: translateY(-50%);
+  box-shadow: 2.5rem 8rem 8rem rgba(0, 0, 0, 0.3);
 }
 
 .info h1 {
@@ -170,7 +172,6 @@ main {
   font-size: 11px;
   text-align: center;
   color: white;
-  /* margin-bottom: 10px; */
 }
 
 .attribution a {
@@ -180,14 +181,11 @@ main {
 
 @media screen and (min-width: 375px) {
   body {
-    min-height: 100vh;
     background-color: var(--Very-Dark-Blue);
     background-image: url("./images/bg-desktop.png");
     background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: cover;
+    background-position: bottom;
   }
-
   main {
     max-width: 600px;
   }
@@ -196,46 +194,38 @@ main {
 @media screen and (min-width: 1440px) {
   body {
     background-image: url(./images/bg-desktop.png);
-    background-size: 100vw;
+    background-size: 100vw 52.5vh;
     background-position: bottom;
-    display: flex;
-    flex-direction: column;
   }
-
   main {
     max-width: unset;
     width: 64%;
-    margin: auto;
     flex-direction: row;
     column-gap: 30px;
   }
-
   .logo {
-    flex-basis: 30%;
+    flex: 1.2;
   }
-
   .status {
-    flex: 1;
+    flex: 2;
     padding: 40px;
-    height: fit-content;
     align-items: flex-start;
     align-self: flex-end;
   }
-
   .info {
-    margin-top: -85px;
+    top: -45px;
     align-self: flex-end;
+    transform: unset;
     border-bottom-right-radius: unset;
   }
-
   .info::after {
+    position: absolute;
     top: 100%;
     right: 0%;
-    border: solid transparent;
     content: "";
-    position: absolute;
+    border: solid transparent;
     border-top-color: white;
     border-width: 20px;
-    border-right: 0px;
+    border-right: none;
   }
 }
